@@ -1,4 +1,4 @@
-#I used customer order data to answer the questions below in SQL.
+##In this SQL, I am querying a database with multiple tables in it to quantify statistics about customer and order data
 
 #1. How many orders were placed in January?
 SELECT COUNT(orderid)
