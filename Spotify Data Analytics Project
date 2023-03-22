@@ -1,7 +1,8 @@
--- For this project, I downloaded Spotify data from Kaggle. Then I created a table to insert Spotify data into.
+-- For this project, I downloaded Spotify data from Kaggle. Then, I created a table to insert Spotify data into.
 -- Finally, I performed analytics on the data using SQL. 
 
 -- Creating a table
+
 CREATE TABLE BIT_DB.Spotifydata (
 id integer PRIMARY KEY,
 artist_name varchar NOT NULL,
@@ -31,7 +32,6 @@ SELECT * FROM Spotifydata
 --Then, I determined how many songs were in the database.
 SELECT count(id)
 FROM BIT_DB.spotifydata 
-
 
 -- I determined who the Top 20 artists were by popularity.
 SELECT artist_name, track_name, popularity
