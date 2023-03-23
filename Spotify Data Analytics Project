@@ -27,50 +27,68 @@ time_signature integer NOT NULL )
 -- Next, I explored the data using the following SQL:
 
 --First, I viewed all columns in the databse.
-SELECT * FROM Spotifydata 
+SELECT * FROM Spotifydata; 
 
 --Then, I determined how many songs were in the database.
 SELECT count(id)
-FROM BIT_DB.spotifydata 
+FROM BIT_DB.spotifydata; 
 
 -- I determined who the Top 20 artists were by popularity.
 SELECT artist_name, track_name, popularity
 FROM BIT_DB.spotifydata 
 ORDER BY popularity desc
-LIMIT 20
+LIMIT 20;
 
 --I found the popularity, danceability, and energy of the most popular song. 
 SELECT artist_name, track_name, popularity, danceability, energy
 FROM BIT_DB.spotifydata 
-WHERE track_name = "good 4 u"
+WHERE track_name = "good 4 u";
 
 -- I determined who the top 5 most popular artists were. 
 SELECT artist_name, avg(popularity)
 FROM BIT_DB.spotifydata 
 group by artist_name
 ORDER BY popularity desc
-LIMIT 5
+LIMIT 5;
 
 --I found the avg danceability and energy of songs by Ed Sheeran.
 SELECT artist_name, track_name, avg(danceability), avg(energy)
 From BIT_DB.spotifydata
-Where artist_name = 'Ed Sheeran'
+Where artist_name = 'Ed Sheeran';
 
 
 -- I determined the avg danceability, energy, and popularity of all the artists. 
 SELECT artist_name, avg(danceability), avg(energy), avg(popularity)
 FROM BIT_DB.spotifydata
 Group by artist_name
-Order by popularity desc
+Order by popularity desc;
 
 
 -- Then, I determined which artists had more than one song listed.
 SELECT artist_name, count(artist_name) as number_of_songs, avg(popularity)
 From BIT_DB.spotifydata
 Group by artist_name
-Having count(artist_name) > 1 
+Having count(artist_name) > 1; 
 
 --Finally, I viewed the songs of artists who had more than one song. 
 Select artist_name, track_name
 From BIT_DB.spotifydata
-Order by artist_name
+Order by artist_name;
+
+--Show and label artists with an average popularity of 90 or above as a "Top Star"
+WITH popularity_average_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name
+)
+ 
+SELECT  artist_name,
+average_popularity,
+'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity>=90;
+
+
+
+
